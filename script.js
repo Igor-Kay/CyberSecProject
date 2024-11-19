@@ -1,7 +1,7 @@
 const gridContainer = document.getElementById("grid-container");
 
-const rows = Math.floor(window.innerHeight / 40);
-const cols = Math.floor(window.innerWidth / 40);
+const rows = Math.floor(window.innerHeight / 20);
+const cols = Math.floor(window.innerWidth / 20);
 
 for (let i = 0; i < rows * cols; i++) {
   const cell = document.createElement("div");
@@ -19,16 +19,11 @@ function getRandomChar() {
 
 function animateCell(cell) {
   let animationInterval;
-  let counter = 0;
 
   cell.dataset.active = "true";
 
   animationInterval = setInterval(() => {
     cell.textContent = getRandomChar();
-    counter++;
-    if (counter > 10) {
-      clearInterval(animationInterval);
-    }
   }, 100);
 
   setTimeout(() => {
@@ -37,6 +32,7 @@ function animateCell(cell) {
       cell.textContent = "";
       cell.classList.remove("fade-out");
       cell.dataset.active = "false";
+      clearInterval(animationInterval);
     }, 1000);
   }, 2000);
 }
